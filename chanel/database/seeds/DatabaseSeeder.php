@@ -15,6 +15,17 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         App\Models\Product::truncate();
+
+        DB::table('users')->insert([
+            'name'  =>  'admin',
+            'email' =>  'admin@chanel.com',
+            'password' => bcrypt('admin'),
+            'role'  =>  1,
+            'created_at'    =>  now(),
+            'updated_at'    =>  now(),        
+            ]);
+
+
         DB::table('products')->insert([
             'nome' => 'Vestido Feminino Babados Alças Finas',
             'url' => 'vestido-feminino-babados-alcas-finas-555',
