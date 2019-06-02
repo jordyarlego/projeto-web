@@ -72,21 +72,27 @@ class SessionController extends Controller
         return redirect()->back()->with('success', 'Carrinho atualizado. Continue as compras!');    
     }
 
+
+    function searchIdonArr($arr, $id){
+        foreach ($arr as $key => $value) {
+           if($value['id'] == $id)
+            return $key;
+        }
+    }
+
     public function removeToCart(Request $request){
         if(!$request->session()->has('cart')) return redirect()->back()->with('error', 'O seu carrinho já esta vazio!');
        
         $cart = $request->session()->get('cart');
 
         if(count($cart) > 0){
-            for ($i=0; $i < count($cart); $i++) { 
-                if($cart[$i]['id'] == $request->id){
-                    if($cart[$i]['quantity'] > 1){
-                        $cart[$i]['quantity'] = $cart[$i]['quantity']-1;
-                        $cart[$i]['totalCost'] = $cart[$i]['cost']*$cart[$i]['quantity'];
-                    }else{
-                        unset($cart[$i]);
-                    }
-                }
+            $x = self::searchIdonArr($cart, $request->id);
+
+            if($cart[$x]['quantity'] > 1){
+                $cart[$x]['quantity'] = $cart[$x]['quantity']-1;
+                $cart[$x]['totalCost'] = $cart[$x]['cost']*$cart[$x]['quantity'];
+            }else{
+                unset($cart[$x]);
             }
         }
 

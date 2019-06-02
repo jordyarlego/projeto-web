@@ -190,8 +190,6 @@ class DatabaseSeeder extends Seeder
              "Blusa Feminina Cropped Listrada Manga Longa Razon 2.jpg", "Blusa Feminina Cropped Listrada Manga Longa Razon 3.jpg"]',
              'created_at'=> now(),
              'updated_at'=>now(),
-
-
         ]);
         DB::table('products')->insert([
             'nome' => 'Blusa Feminina Estampa Beijo Manga Curta',
